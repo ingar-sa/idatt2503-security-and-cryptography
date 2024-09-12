@@ -1,0 +1,18 @@
+Summary:
+The pycalc application is vulnerable to arbitrary code execution due to its use of the python eval function.
+
+Steps to reproduce:
+1. Launch the application using nc ctf.idi.ntnu.no 5006 (you must be on the NTNU network, either by being on campus or using a vpn.)
+2. Write "op <python code>" (without the quotes and brackets) to execute arbitrary python code.
+    - The "op" command simply takes the input string and passes it as an argument to eval.
+    - A limitation is that the code must be a one-liner. Newlines and white space are not possible to add.
+      Semicolons do not work as delimiters either.
+
+Impact:
+This vulnerability allows an attacker to fully compromise the system.
+
+Timeline:
+11.09.2024: The vulnerability was discovered.
+11.09.2024: Work on this report started.
+12.09.2024: This report was finished.
+12.09.2024: This report was submitted.

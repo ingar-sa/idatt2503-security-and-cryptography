@@ -1,0 +1,31 @@
+This is the decompiled code for the main function of the program:
+
+undefined8 main(void)
+{
+  char local_28 [32];
+
+  printf("Enter your name: ");
+  fgets(local_28,0x20,stdin);
+  printf("Hello ");
+  printf(local_28); 
+  putchar(10);
+  return 0;
+}
+
+The code creates a 32-byte char buffer on the stack.
+It then uses fgets to get user input from the terminal.
+Since it uses fgets, the string is automatically null-terminated,
+so leaking memory adjacent to the buffer or stack smashing is not
+the vulnerability
+
+The vulnerability is how printf is used. The buffer is passed to printf
+as the first argument. This means that the contents of the buffer will be
+used as the format string. This allows the user to enter a format string
+which can be used to leak memory.
+
+To fix this, modify the printf call as such:
+
+    printf("%s", local_28);
+
+This makes printf interpret the contents of the buffer as a string.
+Since it is guaranteed to be null-terminated by fgets, this should be safe.
