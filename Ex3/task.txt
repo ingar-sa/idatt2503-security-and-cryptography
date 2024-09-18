@@ -1,0 +1,35 @@
+
+Exercise 3
+Design a capture-the-flag challenge. Describe in a one-page PDF:
+
+    the type of challenge (reversing, crackme, buffer overflow, cryptography, vulnerable web app, vulnerable server software, etc),
+    technical details of the challenge,
+    a write-up (how the challenge is meant to be solved),
+    possible hints provided to the players, and
+    any other details.
+
+Take into consideration:
+
+    Difficulty
+    Knowledge required
+    Resources necessary
+        Docker container
+        Network access
+
+Implementation:
+
+    Try your best to provide a working implementation
+    Consider corner cases or possible bypasses a player could attempt
+    Package your sources (Dockerfile, docker-compose.yaml, sources, etc) in a zip archive
+
+Tips:
+
+    Look up vulnerabilities in the CVE database
+    Check https://www.exploit-db.com/
+    Look at examples on https://ctf.idi.ntnu.no or https://hacker101.com
+    Choose a type of challenge that is interesting to you, or that you want to learn more about
+
+Submission (one submission per group):
+
+    Above described PDF (indicate all group members)
+    Implementation and sources, instructions for building, etc.
