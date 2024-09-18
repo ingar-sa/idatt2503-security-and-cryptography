@@ -1,0 +1,15 @@
+Look at string table
+Cross-reference: where has a an address (e.g. for a string) been used in the code
+Look for memory allocations and write size to see potential sizes for certain resources
+Look for lack of error handling or input validation/sanitization for potential exploits
+
+Function exploitation:
+Look at function call section for dangerous functions, like libc gets, puts, etc., etc.
+If they take a user-supplied buffer, then that is a potential attack vector
+Data flow terminology: Source, where data comes from; sink, where data ends up
+Useful to start with sinks, since they determine whether the source could be used for an exploit
+
+Try to get root shell on a device
+Android: look for adb (android debug bridge). Allows you to connect device to computer and access via shell
+Router: Uboot can dump firmware binary
+Physical security measure: disable RX pin to remove ability to read from device
