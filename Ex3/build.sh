@@ -11,9 +11,9 @@ mkdir -p build
 LIBS="-lpthread -lmpi"
 
 if [ "$1" = "relwdb" ]; then
-    CFLAGS="-O2 -std=c17 -g -DNDEBUG"
+    CFLAGS="-O2 -std=c99 -g -DNDEBUG"
 else
-    CFLAGS="-g -gdwarf-4 -std=c17 -O0 -Wall -Wextra -pedantic -DDEBUG"
+    CFLAGS="-g -gdwarf-4 -std=c99 -O0 -Wall -Wextra -pedantic -DDEBUG"
 fi
 
 mpicc $CFLAGS ctf/mpi-ctf.c -o build/mpi-ctf $LIBS

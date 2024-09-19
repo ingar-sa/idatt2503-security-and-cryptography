@@ -6,6 +6,6 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "$DIR"
 
-mpiexec --use-hwthread-cpus ./build/mpi-ctf
+mpiexec -n 9 --oversubscribe ./build/mpi-ctf
 
 cd "$ORIGINAL_DIR"
