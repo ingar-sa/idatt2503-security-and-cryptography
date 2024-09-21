@@ -1,7 +1,7 @@
 [
   {
     "directory": ".",
-    "command": "mpicc src/mpi-ctf.c -g -O0 -std=c99 -Wall -Wextra -pedantic -DDEBUG -o build/mpi-ctf ",
-    "file": "src/mpi-ctf.c"
+    "command": "mpicc ctf/mpi-ctf.c -g -O0 -std=c99 -Wno-deprecated-declarations -Wall -Wextra -pedantic -DDEBUG -o build/mpi-ctf ",
+    "file": "ctf/mpi-ctf.c"
   },
 ]

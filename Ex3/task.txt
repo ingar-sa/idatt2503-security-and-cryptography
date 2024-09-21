@@ -33,3 +33,25 @@ Submission (one submission per group):
 
     Above described PDF (indicate all group members)
     Implementation and sources, instructions for building, etc.
+
+
+
+/*
+    flag is split between processes -> must assemble the flag in root rank
+        - must somehow identify each proc
+        - assembly must happen in a specific order
+        - some random element to do the rng seed override (rand is deterministic)
+        - direct access to send/receive funcs, or need to use stack smashing?
+        - override send/recv buffer locations to ones visible to the player, that of printing
+   functions/log buffer?
+            * modify the log module with the contents
+            * override/bypass log level check (need to make the checks be done at runtime, not
+   compile time)
+        - maybe provide the stdlib header?
+
+    14753682 correct order of ranks
+    24071 workign seed
+_kxBY0;d9@ko7oJ6:XvRJdnGP@kf?^gNXYJof[0Pr`IUfiRG`>5Kj`>7JpKl7X5oGAfz18__^kl[o>6KEZAlJWPDW:XsUCpNce2QAq=:Gth8AS=HM_cSAegYsjH@yXX^
+*/
+
+

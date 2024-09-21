@@ -237,12 +237,14 @@ Sdb__WriteLogNoModule__(const char *LogLevel, const char *FunctionName, ...)
     return Ret;
 }
 
-#if !defined(SDB_LOG_LEVEL)
-#define SDB_LOG_LEVEL 3
-#endif
+// #if !defined(SDB_LOG_LEVEL)
+// #define SDB_LOG_LEVEL 3
+// #endif
 
-#define SDB_LOG_LEVEL_NONE (0U)
-#define SDB_LOG_LEVEL_ERR  (1U)
+extern u64 SBD_LOG_LEVEL;
+
+#define SDB_LOG_LEVEL_NONE (1U)
+#define SDB_LOG_LEVEL_ERR  (2U)
 #define SDB_LOG_LEVEL_INF  (3U)
 #define SDB_LOG_LEVEL_DBG  (4U)
 
@@ -267,9 +269,8 @@ Sdb__WriteLogNoModule__(const char *LogLevel, const char *FunctionName, ...)
 #define SDB__LOG__(log_level, ...)                                                                 \
     do {                                                                                           \
         if(SDB__LOG_LEVEL_CHECK__(log_level)) {                                                    \
-            sdb_errno LogRet = Sdb__WriteLogIntermediate__(Sdb__LogInstance__,                     \
-                                                           SDB_STRINGIFY(log_level), __VA_ARGS__); \
-            assert(LogRet >= 0);                                                                   \
+            Sdb__WriteLogIntermediate__(Sdb__LogInstance__, SDB_STRINGIFY(log_level),              \
+                                        __VA_ARGS__);                                              \
         }                                                                                          \
     } while(0)
 

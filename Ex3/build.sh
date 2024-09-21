@@ -8,13 +8,8 @@ cd "$DIR"
 
 mkdir -p build
 
-LIBS="-lpthread -lmpi"
-
-if [ "$1" = "relwdb" ]; then
-    CFLAGS="-O2 -std=c99 -g -DNDEBUG"
-else
-    CFLAGS="-g -gdwarf-4 -std=c99 -O0 -Wall -Wextra -pedantic -DDEBUG"
-fi
+//LIBS="-lmpi"
+CFLAGS="-g -gdwarf-4 -std=c99 -O0 -Wno-deprecated-declarations -fno-stack-protector -Wall -Wextra -pedantic -DDEBUG"
 
 mpicc $CFLAGS ctf/mpi-ctf.c -o build/mpi-ctf $LIBS
 
