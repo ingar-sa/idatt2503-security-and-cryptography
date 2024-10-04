@@ -1,0 +1,33 @@
+The code for each attempt can be found in the code directory, the initial files in the corpus
+used to seed the fuzzer can be found in the corpus directory, and images of the output from the 
+fuzzer after each attempt in the output directory.
+
+The test can be compiled as such:
+clang -g -O1 -fsanitize=fuzzer,address SymbolReplacer<n>.c -o sr_fuzzer
+
+and run as such:
+./sr_fuzzer corpus/ -max_total_time=60
+
+1st attempt:
+Program crashed due to a heap-buffer-overflow detected by the address sanitizer
+(which can be seen in the upper-most red text) when given nothing as input.
+This can be seen from output being empty after "Base64:" at the bottom.
+I updated the code with checks for the input length being 0 as well as the data being NULL
+
+2nd attempt:
+Program crashed due to the same error as above, except this time when given a '\n' as input.
+'Cg==' is '\n' base64-encoded. Analyzing the program revealed two errors:
+
+During the while, the order of the checks in `(*StringAlias != '\0' && StrLen < Size)` should be reversed
+This is because with the current order, if the string is not null-terminated `StringAlias` could be incremented
+by Size and then dereferenced. This is equivalent to StringAlias[Size], which is out of bounds for the array. 
+The other problem is the range in the for-loop, it should be `i < StrLen`, not `i <= StrLen`.
+I updated the code to address these problems, and I also changed `*StringAlias != '\0'` to `String[StrLen] != '\0'`
+for clarity.
+
+3rd attempt:
+This time the program didn't crash, but the fuzzer did detect a memory leak. This was because the new
+string is never freed. I updated the code so it frees the new string.
+
+4th attempt:
+This time, everything ran smoothly, and the fuzzer finished its test without detecting any further problems.
