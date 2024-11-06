@@ -1,0 +1,83 @@
+P2 a)
+K = 1000
+1 + 0 + 0 + 0 % 2 = 1 -> (0001)
+0 + 0 + 0 + 1 % 2 = 1 -> (0011)
+0 + 0 + 1 + 1 % 2 = 0 -> (0110)
+0 + 1 + 1 + 0 % 2 = 0 -> (1100)
+1 + 1 + 0 + 0 % 2 = 0 -> (1000)
+Periodicity of 5
+
+K = 0011
+0 + 0 + 1 + 1 % 2 = 0 -> (0110)
+0 + 1 + 1 + 0 % 2 = 0 -> (1100)
+1 + 1 + 0 + 0 % 2 = 0 -> (1000)
+1 + 0 + 0 + 0 % 2 = 1 -> (0001)
+0 + 0 + 0 + 1 % 2 = 1 -> (0011)
+Periodicity of 5
+
+P2 b)
+
+K = 1000
+1 + 0 % 2 = 1 -> (0001)
+0 + 1 % 2 = 1 -> (0011)
+0 + 1 % 2 = 1 -> (0111)
+0 + 1 % 2 = 1 -> (1111)
+1 + 1 % 2 = 0 -> (1110)
+1 + 0 % 2 = 1 -> (1101)
+1 + 1 % 2 = 0 -> (1010)
+1 + 0 % 2 = 1 -> (0101)
+0 + 1 % 2 = 1 -> (1011)
+1 + 1 % 2 = 0 -> (0110)
+0 + 0 % 2 = 0 -> (1100)
+1 + 0 % 2 = 1 -> (1001)
+1 + 1 % 2 = 0 -> (0010)
+0 + 0 % 2 = 0 -> (0100)
+0 + 0 % 2 = 0 -> (1000)
+Periodicity of 14
+
+K = 0011
+0 + 1 % 2 = 1 -> (0111)
+0 + 1 % 2 = 1 -> (1111)
+1 + 1 % 2 = 0 -> (1110)
+1 + 0 % 2 = 1 -> (1101)
+1 + 1 % 2 = 0 -> (1010)
+1 + 0 % 2 = 1 -> (0101)
+0 + 1 % 2 = 1 -> (1011)
+1 + 1 % 2 = 0 -> (0110)
+0 + 0 % 2 = 0 -> (1100)
+1 + 0 % 2 = 1 -> (1001)
+1 + 1 % 2 = 0 -> (0010)
+0 + 0 % 2 = 0 -> (0100)
+0 + 0 % 2 = 0 -> (1000)
+1 + 0 % 2 = 1 -> (0001)
+0 + 1 % 2 = 1 -> (0011)
+Periodicity of 14
+
+
+P4 a)
+01011100 (92)
+00010100 (20)
+11100101 (229)
+10011001 (153)
+
+P4 b)
+x has 16 distinct values before wrapping. Since the multiplicative inverse in GF(2^8) is bijective, 
+and XOR'ing with a fixed key is also bijective, the encrypted values are guaranteed to be unique,
+giving us a periodicity of 16.
+
+P4 c)
+Since the only changing part is the counter, the computation does not depend on the value from another
+computation. Therefore, the computation can be parallelized by distributing subsets of the counter's
+domain to different processors.
+
+P5 a)
+The HMAC is 0100.
+
+P5 b)
+Using the HMAC function on the message yields the MAC 0100, which matches the one attached to the message. The message is therefore likely authentic.
+
+P6 a)
+The purpose of the IV is to ensure that the same plaintext produces distinct ciphertexts when encrypted multiple times independently with the same key, since different IVs will be used. For correct use of CBC mode, a cryptographically secure randomly generated IV value should be used, the IV must be the same size as the underlying block size, an IV should never be used more than once with the same key, and it needs to be available for decryption.
+
+P6 b)
+If the IV is used as a salt and is available to an attacker, they can create any new message x' that starts with x. They can do this by using x as the first block of a new message and setting the IV'=H_IV(x). Since it's a CBC, this will continue the chain of computation.
