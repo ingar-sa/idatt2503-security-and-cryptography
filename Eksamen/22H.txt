@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+void flag(long int printflag)
+{
+    if(printflag == 1)
+    {
+        printf("flag is ss3cr3t\n");
+    }
+}
+
+int main()
+{
+    char buff[32];
+    gets(buff);
+}
+
+
